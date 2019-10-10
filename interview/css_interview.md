@@ -187,7 +187,10 @@ DOM 以树结构表达 HTML 文档。
 content，padding，border，margin   
 四个属性，这就是盒子模型  
 
-盒子模型有两种形式：标准盒子模型，怪异盒子模型
+盒子模型：标准盒子模型，怪异盒子模型，Inherit
+1 标准盒子模型：content-box 盒子尺寸= width/height + padding + border + margin。width只包含内容
+2 怪异盒子模型：border-box 盒子尺寸 = width/height + margin 。width包含border+padding+内容
+3 inherit 从父元素继承box-sizing属性的值
 
 ### 12 src和href的区别
 href是Hypertext Reference的缩写，表示超文本引用。用来建立当前元素和文档之间的链接。常用的有：link、a。

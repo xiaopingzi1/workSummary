@@ -244,3 +244,55 @@ console.log(fun(10));
 
 
 ```
+## 9 ["1","2","3"].map(parseInt)
+```js
+parseInt(string,radix)
+string: 必须，要被解析的字符串
+radix：可选。表示要解析的数字基数，介于2-36之间。
+
+['1', '2', '3'].map(parseInt);
+对于每个迭代map, parseInt()传递两个参数: 字符串和基数。
+所以实际执行的的代码是：
+['1', '2', '3'].map((item, index) => {
+    return parseInt(item, index)
+})
+即返回的值分别为：
+
+parseInt('1', 0) // 1
+parseInt('2', 1) // NaN
+parseInt('3', 2) // NaN, 3 不是二进制
+所以['1', '2', '3'].map(parseInt);===》[1,NaN,NaN];
+```
+parseInt("17",8)=>7+8   8进制17转化为10进制15 7*8^0+1*8^1=7+8=15
+
+## 10 打印结果
+```js
+function a() {
+  alert(this)
+}
+a.call(null);//[object Window]
+```
+ a.call(null);  根据ECMAScript262规范规定：如果第一个参数传入的对象调用者是null或者undefined的话，call方法将把全局对象（也就是window）作为this的值。所以，不管你什么时候传入null，其this都是全局对象window，
+
+```js
+var a = 1;
+var b = function a(X) {
+  x && a(--x)
+}
+alert(a);//1
+```
+
+```js
+var number = 50;
+var obj = {
+  number:60,
+  getNum:function() {
+    var number = 70;
+    return this.number;
+  }
+}
+console.log(obj.getNum());//70 正确60
+console.log(obj.getNum.call());//70 正确50
+console.log(obj.getNum.call({number:20}));//20
+
+```

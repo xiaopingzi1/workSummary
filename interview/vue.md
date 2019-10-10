@@ -579,3 +579,67 @@ new Vue({
     }
 })
 ```
+## 21 active-class是哪个组件的属性？嵌套路由怎么定义？
+active-class是vue-router模块的router-link组件中的属性，用来做选中样式的切换；
+使用方法：
+1.直接在标签内使用
+```js
+<router-link to='/' active-class="active" >首页</router-link>
+
+```
+
+2.在路由js文件，配置active-class
+```js
+<script>
+    const router = new VueRouter({
+        routes,
+        linkActiveClass: 'active'
+    });
+</script>
+```
+使用过程中bug，在首页的active会一直被应用。原因是to:'/'
+解决方法：1.在router-link中写入exact
+```js
+<router-link to='/' active-class="active" exact>首页</router-link>
+```
+2.在路由Js文件中配置active-class
+```js 
+<script>
+    const router = new VueRouter({
+        routes,
+        linkExactActiveClass: 'active'
+    });
+</script>
+```
+
+嵌套路由
+```js
+[
+  {
+    path: '/profile'
+    component: profile, // 此处不能少
+    children: [
+      {
+        path: '/profile/list',
+        component: profileList
+      },
+      {
+        path: '/profile/item',
+        component: profileItem
+      }
+    ]
+  },
+]
+```
+## 22 vue-router有哪几种导航钩子？有哪些组件？
+第一种：是全局导航钩子：router.beforeEach(to,from,next)，作用：跳转前进行判断拦截。  
+第二种：组件内的钩子  
+第三种：单独路由独享组件  
+
+## v-model是什么？怎么使用？vue中标签怎么绑定事件？
+v-model用于表单数据的双向绑定，其实它就是一个语法糖，这个背后就做了两个操作：  
+  1. v-bind绑定一个value属性  
+  2. v-on指令给当前元素绑定input事件
+
+1.通过指令 v-on：事件名=“函数名”绑定事件 eg:<button     v-on:click="doThis ">  
+2.通过语法 @事件名=“函数名”绑定事件 eg:<button @click.stop="doThis"></button>

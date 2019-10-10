@@ -201,6 +201,29 @@ sessionStorage 对象
   Cookie:（不能超过4k）始终在同源的Http请求中携带（即使不需要），他在浏览器和服务器之间来回传递；后两者均只在本地保存，不会自动发给服务器；只在设置的过期时间之前有用；所有同源窗口之间使用。  
   SessionStorge:缓存存储,存储范围大。所有的同源窗口之间共享。  
   LocalStrage:本地存储，仅在同浏览器，同浏览页面共享。
+  一、cookie和session
+
+  cookie和session都是用来跟踪浏览器用户身份的会话方式。
+
+  区别：
+
+  1、保持状态：cookie保存在浏览器端，session保存在服务器端  
+  2、使用方式：  
+    （1）cookie机制：如果不在浏览器中设置过期时间，cookie被保存在内存中，生命周期随浏览器的关闭而结束，这种cookie简称会话cookie。如果在浏览器中设置了cookie的过期时间，cookie被保存在硬盘中，关闭浏览器后，cookie数据仍然存在，直到过期时间结束才消失。  
+     Cookie是服务器发给客户端的特殊信息，cookie是以文本的方式保存在客户端，每次请求时都带上它  
+    （2）session机制：当服务器收到请求需要创建session对象时，首先会检查客户端请求中是否包含sessionid。如果有sessionid，服务器将根据该id返回对应session对象。如果客户端请求中没有sessionid，服务器会创建新的session对象，并把sessionid在本次响应中返回给客户端。通常使用cookie方式存储sessionid到客户端，在交互中浏览器按照规则将sessionid发送给服务器。如果用户禁用cookie，则要使用URL重写，可以通过response.encodeURL(url) 进行实现；API对encodeURL的结束为，当浏览器支持Cookie时，url不做任何处理；当浏览器不支持Cookie的时候，将会重写URL将SessionID拼接到访问地址后。  
+    3、存储内容：cookie只能保存字符串类型，以文本的方式；session通过类似与Hashtable的数据结构来保存，能支持任何类型的对象(session中可含有多个对象)  
+
+    4、存储的大小：cookie：单个cookie保存的数据不能超过4kb；session大小没有限制。
+
+    5、安全性：cookie：针对cookie所存在的攻击：Cookie欺骗，Cookie截获；session的安全性大于cookie。
+    原因如下：
+    （1）sessionID存储在cookie中，若要攻破session首先要攻破cookie；
+    （2）sessionID是要有人登录，或者启动session_start才会有，所以攻破cookie也不一定能得到sessionID；
+    （3）第二次启动session_start后，前一次的sessionID就是失效了，session过期后，sessionID也随之失效。
+    （4）sessionID是加密的
+    （5）综上所述，攻击者必须在短时间内攻破加密的sessionID，这很难。
+
 
 ### 8 html5为什么只需要写< !doctype html >
   HTML 4.01 中的 doctype 需要对 DTD 进行引用，因为 HTML 4.01 基于 SGML。

@@ -542,12 +542,14 @@ console.log(objCopy);//Object {name: "Hanna", age: 22}
 减少商品数量：判断input的值是否大于1.
 
 ## 18 call apply 
+call和apply可以重新用来定义函数的执行环境，也就是this的指向。
 ```js
 /*apply()方法*/
-function.apply(thisObj[, argArray])
+函数名.apply(obj,[参数1,参数2,参数3……]);把所有的参数写在数组里，即使只有一个参数也要写在数组里
 
 /*call()方法*/
-function.call(thisObj[, arg1[, arg2[, [,...argN]]]]);
+函数名.call(obj,参数1,参数2,参数3……);  需要使用逗号分隔列出所有的参数
+
 
 ```
 定义  

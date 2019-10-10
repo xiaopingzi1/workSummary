@@ -45,7 +45,17 @@
 //   b = a;
 //   b.value = 2;
 //   alert(a.valu
-
+var number = 50;
+var obj = {
+  number:60,
+  getNum:function() {
+    var number = 70;
+    return this.number;
+  }
+}
+console.log(obj.getNum());//70 ->
+console.log(obj.getNum.call());//70
+console.log(obj.getNum.call({number:20}));//20
   </script>
 </body>
 </html>
