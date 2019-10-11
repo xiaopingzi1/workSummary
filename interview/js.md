@@ -291,8 +291,42 @@ var obj = {
     return this.number;
   }
 }
-console.log(obj.getNum());//70 正确60
-console.log(obj.getNum.call());//70 正确50
+console.log(obj.getNum());//70 正确60 getNum被obj调用，number=60;
+console.log(obj.getNum.call());//70 正确50 此时this绑定在window
 console.log(obj.getNum.call({number:20}));//20
+
+```
+```js
+for (var i = 0;i < 5; i++) {
+  (function () {
+    setTimeout(function() {
+      console.log(i)//5,5,5,5,5
+    },i*1000);
+  })(i)
+}
+
+
+
+
+
+for (var i = 0; i < 5; i++) { 
+  setTimeout(function (){
+    console.log(i); //5,5,5,5,5
+   },1000); 
+}
+setTimeout 的 console.log(i); 的i是 var 定义的，所以是函数级的作用域，不属于 for 循环体，属于 global。等到 for 循环结束，i 已经等于 5 了，这个时候再执行 setTimeout 的五个回调函数，里面的 console.log(i); 的 i 去向上找作用域，只能找到 global下 的 i，即 5。所以输出都是 5。
+
+setTimeout是个异步定时函数，js是单线程，所以就算延时为0，它也是要等到for循环执行完了，才到它执行，每执行一次for语句就会就会产生一个异步执行，放在等待队列里，
+```
+
+```js
+var y = 10;
+if ( !(x in window)) {
+  var x = 10;
+} else {
+  ++y
+}
+console.log(x);//undefined if里面的var x= 10;var x;会被提前
+console.log(y);//11
 
 ```
