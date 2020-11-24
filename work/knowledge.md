@@ -1,34 +1,71 @@
-## 1 Vue.nextTick
+## 1 createElement函数中，模板中属性的写法
 ```js
-new Vue({
-  el: '#app',
-  data: {
-    count: 0,
-    list: []
+  {
+  // 与 `v-bind:class` 的 API 相同，
+  // 接受一个字符串、对象或字符串和对象组成的数组
+  'class': {
+    foo: true,
+    bar: false
   },
-  methods:{
-    add() {
-      this.count += 1
-      this.list.push(1)
-      this.$nextTick(()=&gt;{
-          let li = this.$refs.ul.querySelectorAll('li')
-          li.forEach(item=&gt;{
-          item.style.color = 'red';
-        })
-      })
+  // 与 `v-bind:style` 的 API 相同，
+  // 接受一个字符串、对象，或对象组成的数组
+  style: {
+    color: 'red',
+    fontSize: '14px'
+  },
+  // 普通的 HTML 特性
+  attrs: {
+    id: 'foo'
+  },
+  // 组件 prop，这个属性是当createElement渲染的是一个组件时使用
+  props: {
+    myProp: 'bar'
+  },
+  // DOM 属性
+  domProps: {
+    innerHTML: 'baz'
+  },
+  // 事件监听器在 `on` 属性内，
+  // 但再也不支持如 `v-on:keyup.enter` 这样的修饰器。
+  // 须要在处理函数中手动检查 keyCode。
+  on: {
+    click: this.clickHandler
+  },
+  // 仅用于组件，用于监听原生事件，而不是组件内部使用
+  // 组件内的原生事件触发时，使用`vm.$emit` 触发的事件。
+  nativeOn: {
+    click: this.nativeClickHandler
+  },
+  // 自定义指令。注意，你没法对 `binding` 中的 `oldValue`
+  // 赋值，由于 Vue 已经自动为你进行了同步。
+  directives: [
+    {
+      name: 'my-custom-directive',
+      value: '2',
+      expression: '1 + 1',
+      arg: 'foo',
+      modifiers: {
+        bar: true
+      }
     }
-  }
-})
+  ],
+  // 做用域插槽的格式为
+  // { name: props => VNode | Array<VNode> }
+  scopedSlots: {
+    default: props => createElement('span', props.text)
+  },
+  // 若是组件是其它组件的子组件，需为插槽指定名称
+  slot: 'name-of-slot',
+  // 其它特殊顶层属性
+  key: 'myKey',
+  ref: 'myRef',
+  // 若是你在渲染函数中给多个元素都应用了相同的 ref 名，
+  // 那么 `$refs.myRef` 会变成一个数组。
+  refInFor: true
+}
+
 ```
-如果希望在DOM更新后再更新样式，可以在nextTick的回调中执行更新样式的操作。
-* 数据更新时，并不会立即更新DOM。如果在更新数据之后的代码执行另一段代码，有可能达不到预想效果。将视图更新后的操作放在nextTick的回调中执行，其底层通过微任务的方式执行回调，可以保证DOM更新后才执行代码。
-
 ## 2 scoped实现私有化样式
-总结一下scoped三条渲染规则
-
-    给HTML的DOM节点加一个不重复data属性(形如：data-v-2311c06a)来表示他的唯一性
-    在每句css选择器的末尾（编译后的生成的css语句）加一个当前组件的data属性选择器（如[data-v-2311c06a]）来私有化样式
-    如果组件内部包含有其他组件，只会给其他组件的最外层标签加上当前组件的data属性
 
 ## 3 路由懒加载
 ```js
