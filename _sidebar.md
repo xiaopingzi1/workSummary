@@ -2,12 +2,12 @@
  * @Author: fengzp
  * @Date: 2020-09-15 12:46:50
  * @LastEditors: fengzp
- * @LastEditTime: 2020-10-14 12:39:21
+ * @LastEditTime: 2020-12-22 19:51:07
  * @Introduce: Do not edit
 -->
 * 面试
     * [vue部分](./work/knowledge)
-    * [](./work/alipay)
+    * [面试总结](./interview/2020.md)
 * html
     * [html](./list/html/html)
 * css
@@ -36,9 +36,6 @@
     * [cookie/session](./list/PHP/cookie)
 * ES6
     * [ES6语法](./list/es6/es6)
-* webpack
-    * [webpack基本配置](./list/webpack/webpack)
-    * [具体配置项](./list/webpack/peizhi)
 * vue
     * [vue基础部分](./list/vue/vue基础)
     * [vue案例](./list/vue/vue)

@@ -1,3 +1,14 @@
+<!--
+ * @Author: fengzp
+ * @Date: 2020-09-15 12:55:14
+ * @LastEditors: fengzp
+ * @LastEditTime: 2020-11-25 19:42:10
+ * @Introduce: Do not edit
+-->
+### 1 vue dom diff
+虚拟dom优点：
+1. 减少dom操作，
+
 ### 1 点击图片跳转到其他小程序的h5页面
 ```js
  my.navigateToMiniProgram({
