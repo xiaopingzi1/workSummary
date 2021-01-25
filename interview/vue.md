@@ -54,8 +54,37 @@
     }
     ```
 
-### 3 vue常用的指令和用法
+### 3 vue插槽
+1.匿名插槽,一个组件只能插入一个默认插槽，就是匿名插槽
+2.具名插槽，可以有多个，名字不同即可
+3.作用于插槽 是父组件引用子组件中的数据；使用slot-scope 进行数据的传递
+```js
+// 匿名插槽
+<slot></slot>
+// 具名插槽
+<slot name="up"></slot>
 
+// 作用于插槽
+// 子组件中 将数据传递给父组件
+<template>
+  <div>
+    <h2>这里是子组件</h2>
+    <slot :data="data"></slot>
+  </div>
+</template>
+
+// 在父组件中
+// 这里自定义一个变量 我们传的数据会到这个对象下面 使用的时候是  user.data                       
+// data就是我们传过来的数据
+<child>
+  <template slot-scope="user">   
+    <div class="tmp">
+      <span v-for="item in user.data" :key="item">{{item}}</span>
+    </div>
+  </template>
+</child>
+// 如果我们不用 slot-scope进行接受的话 子组件的作用域插槽 就会变成了 普通的 匿名插槽了
+```
 ### 4 对于MVVM的理解
 
    * MVVM 是 Model-View-ViewModel 的缩写。
