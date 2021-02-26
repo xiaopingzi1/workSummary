@@ -1,0 +1,13 @@
+<!--
+ * @Author: fengzp
+ * @Date: 2021-02-26 16:42:07
+ * @LastEditors: fengzp
+ * @LastEditTime: 2021-02-26 16:51:30
+ * @Introduce: Do not edit
+-->
+## 1 响应式布局和自适应布局
+响应式布局
+Responsive design，实现不同屏幕分辨率的终端上浏览网页的不同展示方式。通过响应式设计能使网站在手机和平板电脑上有更好的浏览阅读体验。
+
+响应式设计步骤
+1. 设置 Meta 标签
